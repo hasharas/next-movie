@@ -1,7 +1,12 @@
 import { getMovieDetails } from '@/lib/tmdb'
+import {notFound} from 'next/navigation'
 
 export default async function MovieDetails({ params }: { params: { id: string } }) {
   const movie = await getMovieDetails(params.id)
+
+  if (!movie) {
+    notFound()
+  }
 
   return (
     <div>
